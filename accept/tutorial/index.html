@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>Tutorial - ACCEPT</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../index.html">ACCEPT</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../index.html">Introduction</a>
+                </li>
+            
+            
+            
+                <li class="active">
+                    <a href="index.html">Tutorial</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../cli/index.html">Reference</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../hack/index.html">Hacking</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                    <a rel="next" href="../index.html">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../cli/index.html">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/uwsampa/accept/">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="index.html#lets-get-started">Let's Get Started</a></li>
+        
+            <li><a href="index.html#add-source-files">Add Source Files</a></li>
+        
+            <li><a href="index.html#makefile">Makefile</a></li>
+        
+            <li><a href="index.html#try-building">Try Building</a></li>
+        
+            <li><a href="index.html#source-setup">Source Setup</a></li>
+        
+            <li><a href="index.html#annotate">Annotate</a></li>
+        
+            <li><a href="index.html#see-optimizations">See Optimizations</a></li>
+        
+            <li><a href="index.html#write-a-quality-metric">Write a Quality Metric</a></li>
+        
+            <li><a href="index.html#add-arguments">Add Arguments</a></li>
+        
+            <li><a href="index.html#run-the-toolchain">Run the Toolchain</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="lets-get-started">Let&rsquo;s Get Started</h1>
+<p>This section will guide you through setting up a new application to be analyzed and optimized by the ACCEPT toolchain.</p>
+<p>Before following this tutorial, you&rsquo;ll need to <a href="../index.html#building">build the ACCEPT toolchain</a>.</p>
+<h2 id="add-source-files">Add Source Files</h2>
+<p>First, make a new directory in <code>apps/</code> with the name of your program. We&rsquo;ll use <code>apps/foo</code> in this example.</p>
+<p>Put your C/C++ sources in <code>apps/foo</code>. By default, The build system will assume
+all <code>.c</code> and <code>.cpp</code> files are to be built and linked together. (You can
+customize this later if need be.)</p>
+<h2 id="makefile">Makefile</h2>
+<p>Next, add a <code>Makefile</code> for your experiment. Your Makefile should include at least these incantations to make everything work:</p>
+<pre><code class="makefile">APP_MK := ../app.mk
+include $(APP_MK)
+</code></pre>
+
+<p>For simple programs, this is all you need; if you need more options (like specifying the source files to compile or the arguments to use during execution), see <a href="../cli/index.html#makefile">the Makefile section of the tool documentation</a>.</p>
+<h2 id="try-building">Try Building</h2>
+<p>You can now use the ACCEPT toolchain to try building your application. Just type:</p>
+<pre><code class="sh">$ accept -f build
+</code></pre>
+
+<p>(The <code>-f</code> flag avoids memoization—see the <a href="../cli/index.html">tool documentation</a>.) This command shows the output of the build process, including any errors emitted by the compiler.</p>
+<p>Like most <code>accept</code> commands, <code>accept build</code> uses the application in the working directory by default. You can specify a path as an argument to build something else.</p>
+<h2 id="source-setup">Source Setup</h2>
+<p>You will need to make a few small changes to your application&rsquo;s source code to make it fit the ACCEPT workflow:</p>
+<ul>
+<li>The output will need to be written to a file (or multiple files). This is because the quality measurement infrastructure needs to pick up the output after the execution finishes. If the program&rsquo;s output is sent to the console, change it to instead send writes to a text file.</li>
+<li>Add <code>#include &lt;enerc.h&gt;</code> to relevant files. This header file includes definitions for both annotations and ROI markers (next!).</li>
+<li>Mark the &ldquo;interesting&rdquo; part of the workload for timing using <em>region of interest</em> (ROI) markers. ACCEPT needs to time your program&rsquo;s execution, but you don&rsquo;t want it to time mundane tasks like reading input files. Insert a call to <code>accept_roi_begin()</code> immediately before the program&rsquo;s main chunk of work, and insert a call to <code>accept_roi_end()</code> immediately afterward.</li>
+</ul>
+<h2 id="annotate">Annotate</h2>
+<p>Your next task is to actually annotate the application to enable approximation.
+Insert <code>APPROX</code> type qualifiers and <code>ENDORSE()</code> casts into your code as appropriate.</p>
+<p>The ACCEPT paper contains details on the annotation language. (See tech report <a href="ftp://ftp.cs.washington.edu/tr/2015/01/UW-CSE-15-01-01.pdf">UW-CSE-15-01-1</a>.) This guide should eventually contain a summary of the annotation features, but for now, take a look at the paper.</p>
+<p>You might find it helpful to repeatedly run <code>accept -f build</code> during annotation to see type errors and guide your placement of qualifiers.</p>
+<p>Remember that you will need to use <code>#include &lt;enerc.h&gt;</code> in files where use annotations.</p>
+<h2 id="see-optimizations">See Optimizations</h2>
+<p>Now that you have an annotated application, you can ask ACCEPT to analyze the program for optimization opportunities. Type:</p>
+<pre><code class="sh">$ accept log
+</code></pre>
+
+<p>(Remember to add <code>-f</code> if you make any changes to your source files.) This will spit out a log of places where ACCEPT looked for—and found—possible relaxations. It will attempt to point you toward source locations that, given a bit more attention, could unlock to more opportunities. Again, the ACCEPT paper describes the purpose of this feedback log.</p>
+<h2 id="write-a-quality-metric">Write a Quality Metric</h2>
+<p>The dynamic feedback loop component of ACCEPT relies on a function that assesses the <em>quality</em> of a relaxed program&rsquo;s output. You write this function in a Python script that accompanies the source code of your program.</p>
+<p>To write your application&rsquo;s quality metric, create a file called <code>eval.py</code> alongside your source files. There, you&rsquo;ll define two Python functions: <code>load</code> and <code>score</code>. You never have to worry about calling these functions—the ACCEPT driver itself invokes them during the auto-tuning process.</p>
+<p><strong>Load function.</strong> The <code>load</code> function takes no arguments. It loads and parses the output of one execution of the program and returns a data structure representing it. For example, you might parse a CSV file to get a list of floating-point numbers and return that.</p>
+<p><strong>Score function.</strong> The <code>score</code> function takes two arguments, which are both outputs returned by previous invocations of <code>load</code>: the first is the output of a <em>precise</em> execution and the second is the output from some <em>relaxed</em> execution. The scoring function should compute the &ldquo;difference&rdquo; (defined in a domain-specific way) between the two and return a value between 0.0 and 1.0, where 0.0 is perfectly correct and 1.0 is completely wrong.</p>
+<p>It bears repeating that both of these functions are <em>application-specific</em>: there is no &ldquo;standard&rdquo; implementation of either <code>load</code> or <code>score</code>. Both functions convey unique information about your program to the ACCEPT system. This means that your program can have <em>any</em> output format as long as the output is written to a file (or even multiple files); you write <code>load</code> to explain your chosen format. Similarly, you get to decide what &ldquo;quality&rdquo; means for your program; you write <code>score</code> to mechanise your chosen notion of quality.</p>
+<p>Here&rsquo;s an example <code>eval.py</code> written for a notional program whose output consists of a text file, <code>my_output.txt</code>, containing a list of numbers. The <code>load</code> function here strips off some additional (irrelevant) text on each line and returns the parsed data as a list of floats. The <code>score</code> function takes the mean absolute difference, capped at 1, between the two lists of numbers:</p>
+<pre><code>def load():
+    out = []
+    with open('my_output.txt') as f:
+        for line in f:
+            first_num, _ = line.split(None, 1)
+            out.append(float(first_num))
+    return out
+
+def score(orig, relaxed):
+    total = 0.0
+    for a, b in zip(orig, relaxed):
+        total += min(abs(a - b), 1.0)
+    return total / len(orig)
+</code></pre>
+<h2 id="add-arguments">Add Arguments</h2>
+<p>Because ACCEPT is a <a href="http://en.wikipedia.org/wiki/Profile-guided_optimization">profiling compiler</a>, it needs to know how to <em>execute</em> your program. You need to provide the command-line arguments for your program in the Makefile using the <code>RUNARGS</code> variable. Add a line like this to your project&rsquo;s Makefile:</p>
+<pre><code class="makefile">RUNARGS := --foo input.txt
+</code></pre>
+
+<p>indicating how you want your program to be executed. You can also specify a different invocation using the <code>TESTARGS</code> variable for a separate, final performance evaluation. See the <a href="../cli/index.html#makefile">Makefile</a> section for details.</p>
+<h2 id="run-the-toolchain">Run the Toolchain</h2>
+<p>Once you&rsquo;re happy with your annotations, you can run the full toolchain to optimize your program. Run this command:</p>
+<pre><code class="sh">$ accept run
+</code></pre>
+
+<p>from the directory containing your application (and its Makefile).</p>
+<h3 id="experiment-workflow">Experiment Workflow</h3>
+<p>Here&rsquo;s what happens when you execute <code>accept run</code>.</p>
+<p>The program is first run once without approximation. This run without approximation is known as the precise run.</p>
+<ul>
+<li>During the precise run, the program writes precise data values to an output file.</li>
+<li>After the precise run, the <code>load</code> function of the <code>eval.py</code> script stores those precise data values in a data structure that is in the database.</li>
+</ul>
+<p>The program is then run several times with approximation. These runs with approximation are known as the approximate runs. The approximate runs differ slightly in their methods of relaxation, but each approximate run is evaluated in the same manner.</p>
+<ul>
+<li>During an approximate run, the program writes approximate data values to an output file.</li>
+<li>After the approximate run, the <code>load</code> function of the <code>eval.py</code> script stores those approximate data values in a data structure that is in the database.</li>
+<li>Finally, the <code>score</code> function computes a correctness score for the approximate run. The correctness score is a metric of error between the values of the data structure filled by the precise run and the corresponding values of the data structure filled by the approximate run. A score of 0.0 indicates complete correctness, while a score of 1.0 indicates complete incorrectness.</li>
+</ul>
+<h3 id="options">Options</h3>
+<p>The <a href="../cli/index.html">reference page</a> has more detail about how to invoke the <code>accept run</code> command. Here are a few options you&rsquo;ll want to be aware of:</p>
+<ul>
+<li>Replication: Random variations in timing can make results seem unpredictable. ACCEPT can run your program multiple times and compute averages. Pass the <code>-r</code> flag to the command and specify the number of replicas: for example, <code>accept -r3 run</code> will use the average of three executions per configuration.</li>
+<li>Detailed output: By default, ACCEPT only shows you the <em>optimal</em> configurations for your program. You can see the suboptimal (and broken) configurations by typing <code>accept run -v</code>.</li>
+<li>Progress logging: For a long experiment, it can be helpful to know that ACCEPT is still making progress. Use the global verbose flag to see more logged messages: <code>accept -v run</code>.</li>
+</ul></div>
+        </div>
+
+        
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script src="../js/base.js"></script>
+    </body>
+</html>

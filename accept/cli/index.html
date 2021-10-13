@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>Reference - ACCEPT</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../index.html">ACCEPT</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../index.html">Introduction</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../tutorial/index.html">Tutorial</a>
+                </li>
+            
+            
+            
+                <li class="active">
+                    <a href="index.html">Reference</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../hack/index.html">Hacking</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                    <a rel="next" href="../tutorial/index.html">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../hack/index.html">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/uwsampa/accept/">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="index.html#the-accept-tool">The "accept" Tool</a></li>
+        
+            <li><a href="index.html#memoization">Memoization</a></li>
+        
+            <li><a href="index.html#sandboxing">Sandboxing</a></li>
+        
+            <li><a href="index.html#commands">Commands</a></li>
+        
+            <li><a href="index.html#options">Options</a></li>
+        
+            <li><a href="index.html#evalpy">eval.py</a></li>
+        
+            <li><a href="index.html#makefile">Makefile</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="the-accept-tool">The &ldquo;accept&rdquo; Tool</h1>
+<p>Type <code>accept</code> with no arguments to see the available commands. You can also type <code>accept COMMAND --help</code> to see more documentation for a specific command.</p>
+<p>Keep in mind that most actions in the <code>accept</code> tool are both <em>memoized</em> and <em>sandboxed</em>. This can be somewhat surprising at first, so read on to see what these do.</p>
+<h2 id="memoization">Memoization</h2>
+<p>Commands <em>save intermediate results</em> to help save time when iterating. For example, when you type <code>accept build</code> the first time, your project is actually built and the log captured. The next time you run <code>accept build</code>, the command returns immediately with the saved log text; it doesn&rsquo;t actually rebuild your project.</p>
+<p>This means that, after executing a command successfully once, it won&rsquo;t respond to any changes you make (e.g., modifying source files). Use the <a href="index.html#-force-f">force flag</a> (e.g., <code>accept -f build</code>) to ensure you re-compute.</p>
+<p>You can also completely remove all of the memoized results and start over. Just delete the <code>memo.db</code> file from the ACCEPT directory. (This is also the solution to any SQLite errors that might occur if the database is corrupted.)</p>
+<h2 id="sandboxing">Sandboxing</h2>
+<p>Builds are performed in a temporary directory to avoid cluttering your filesystem. This is why you won&rsquo;t see build products in your working directory after running commands.</p>
+<p>If you need to inspect the results of a computation, supply the <a href="https://sampa.cs.washington.edu/accept/-keep-sandboxes-k">&ldquo;keep sandboxes&rdquo; flag</a>. By combining this with the <a href="index.html#-force-f">force</a> and <a href="https://sampa.cs.washington.edu/accept/-verbose-v">verbose</a> flags, you can see where your build products end up. For example:</p>
+<pre><code class="sh">$ accept -kfv build
+building in directory: /private/var/folders/py/tyzbll7117l90mv29bnlrtl80000gn/T/tmpldzE8z
+[...]
+</code></pre>
+
+<p>Now you can follow that long, garbled path to find your executable and intermediate files.</p>
+<h2 id="commands">Commands</h2>
+<p>Here are the <code>accept</code> commands that are useful when working with the system:</p>
+<h3 id="accept-build"><code>accept build</code></h3>
+<p>Build the program in the current working directory. (Like all the commands below, you can also specify a specific directory as an argument instead.) Show the output of the compiler.</p>
+<p>The effect is much like typing <code>make</code>, except memoized and sandboxed (see above).</p>
+<p>No program is actually executed. This is useful while writing your application to check for annotation errors and other syntax stuff.</p>
+<h3 id="accept-log"><code>accept log</code></h3>
+<p>Build the program in the current working directory. Instead of showing the compiler&rsquo;s output, print out the ACCEPT optimization log.</p>
+<p>This explains which opportunities where analyzed for approximation, which are ready for relaxation, and which statements are preventing relaxation opportunities.</p>
+<h3 id="accept-run"><code>accept run</code></h3>
+<p>Run the entire ACCEPT workflow for the program in the current working directory. Print out the optimal configurations discovered by ACCEPT.</p>
+<p>By default, the command prints out the optimal configurations found by ACCEPT. The <em>verbose</em> flag, <code>-v</code>, makes this command print out all configurations&mdash;including suboptimal and broken ones&mdash;for debugging.</p>
+<p>The <em>test</em> flag, <code>-t</code>, enables post-hoc &ldquo;testing&rdquo; executions. With this setting, the tool will re-execute all the <em>optimal</em> configuration using the program&rsquo;s test input (see <a href="index.html#execution-arguments">the section about TESTARGS</a>, below). These results are shown instead of the intermediate (&ldquo;training&rdquo;) results.</p>
+<h3 id="accept-precise"><code>accept precise</code></h3>
+<p>Build and execute a baseline, precise configuration of the program in the current working directory.</p>
+<p>Show the output of the program (parsed by the <code>eval.py</code> script&rsquo;s <code>load()</code> function) and the execution time in seconds.</p>
+<h3 id="accept-approx"><code>accept approx</code></h3>
+<p>Build and execute approximate configurations of the program in the current working directory. By default, all approximate configurations are run. An optional argument lets you select a specific single configuration by its index.</p>
+<h2 id="options">Options</h2>
+<p>The <code>accept</code> tool provides a few common flags (which should appear before the specific subcommand):</p>
+<h3 id="-verbose-v"><code>--verbose</code>, <code>-v</code></h3>
+<p>Enable more logging output. This is especially helpful if you have a long-running command and want to make sure it&rsquo;s actually making progress.</p>
+<p>Use this option multiple times to get more verbose output (e.g., <code>-vv</code>).</p>
+<h3 id="-force-f"><code>--force</code>, <code>-f</code></h3>
+<p>Don&rsquo;t use memoized results; force re-computation.</p>
+<p>Every result of every substantial action in the ACCEPT tooling is stored in a database by default and re-used when possible. For example, the output of the compiler when typing <code>accept build</code> will be stored and reused the next time you run the command without actually recompiling the program. This means that subsequent invocations of <code>accept build</code> will not pick up any changes to your source files.</p>
+<p>Forcing re-computation avoids using memoized outputs so that <code>accept build</code> actually recompiles your code.</p>
+<h3 id="-keep-sandboxes-k"><code>--keep-sandboxes</code>, <code>-k</code></h3>
+<p>Builds and executions in ACCEPT are performed in a temporary directory under <code>/tmp</code>. By default, they are deleted after the command completes. To instead keep the sandboxes around for manual inspection, supply this flag.</p>
+<h3 id="-cluster-c"><code>--cluster</code>, <code>-c</code></h3>
+<p>By default, everything is run locally and in serial. To run data collections in
+parallel on a cluster, install and set up the <a href="https://github.com/sampsyo/cluster-workers">cluster-workers</a> library. Then
+pass this option to enable cluster execution.</p>
+<h3 id="-reps-r-test-reps-r"><code>--reps</code>, <code>-r</code>; <code>--test-reps</code>, <code>-R</code></h3>
+<p>Control the number of repeated executions used.</p>
+<p>By default, the <code>accept</code> command only invokes each program configuration once to measure its output and execution time. You can average over several executions by typing, for example, <code>-r 5</code>.</p>
+<p>The <code>-r</code> flag controls <em>training</em> executions (the bulk of the executions used during the ACCEPT workflow) while <code>-R</code> controls the number of <em>testing</em> executions (used only at the end of the process). You usually want the latter to be greater than the former, since the testing runs constitute the tool&rsquo;s final output and you probably want reliable results.</p>
+<h2 id="evalpy">eval.py</h2>
+<p>The ACCEPT tool uses a per-application Python script for collecting and evaluating the application&rsquo;s output quality. This means that applications need to be accompanied by an <code>eval.py</code> file. This file should define two Python functions:</p>
+<ul>
+<li><code>load()</code>: This function takes no arguments, loads the output of a program execution (either precise or approximate), and returns this output.</li>
+<li><code>score(orig, relaxed)</code>: This function takes two arguments, both of which are <em>outputs</em> returned by the <code>load()</code> function. It should return a number between 0.0 and 1.0 describing the <em>accuracy</em> of the <code>relaxed</code> output with respect to the <code>orig</code> output. For example, if <code>load()</code> just returns a number, <code>score</code> might compute the difference between the two (e.g., <code>return abs(orig - relaxed)</code>).</li>
+</ul>
+<p>When running an experiment, ACCEPT does roughly the following:</p>
+<ul>
+<li>Runs the precise version of your program.</li>
+<li>Call your <code>load()</code> function and store that in a database under the name &ldquo;orig&rdquo;.</li>
+<li>Run an approximate version of your program.</li>
+<li>Call <code>load()</code> again and store that in a database too under the name &ldquo;relaxed&rdquo;.</li>
+<li>Finally, call your <code>score()</code> function with those two &ldquo;orig&rdquo; and &ldquo;relaxed&rdquo; values.</li>
+</ul>
+<p>This means you never have to worry about <em>calling</em> the two functions; ACCEPT itself will call them during the experiment process.</p>
+<p>The tutorial contains <a href="../tutorial/index.html#write-a-quality-metric">an example</a> of eval.py.</p>
+<h3 id="dealing-with-large-files">Dealing With Large Files</h3>
+<p>If your program&rsquo;s output is big (e.g., an image), it might be inefficient to store the data in our database. For that reason, ACCEPT provides an alternate way to write eval.py for large outputs.</p>
+<p>To store entire output files instead of putting parsed results in a database, write your <code>load()</code> function to just return a string containing the filename you want to save, prefixed with <code>file:</code>.
+Then, your <code>score()</code> function will receive cached filenames instead of output data.
+In this style, your <code>score()</code> function will need to parse both files (something that is <code>load()</code>&lsquo;s job in the small-outputs style).</p>
+<h2 id="makefile">Makefile</h2>
+<p>Applications tell ACCEPT how to build them using a standard Makefile. Your application&rsquo;s Makefile currently must contain at least these lines:</p>
+<pre><code class="makefile">APP_MK := ../app.mk
+include $(APP_MK)
+</code></pre>
+
+<p>If necessary, you can change the <code>APP_MK</code> variable to point to where ACCEPT is installed. (This is only necessary if you placed your directory outside of ACCEPT&rsquo;s <code>apps</code> directory.)</p>
+<p>There are a number of other options you can specify here:</p>
+<h3 id="sources">Sources</h3>
+<p>By default, the build system will compile any files ending in <code>.c</code> and <code>.cpp</code> into your executable. You can set the <code>SOURCES</code> variable to explicitly indicate which files should be compiled (rather than using <code>*.c *.cpp</code>). For example:</p>
+<pre><code class="makefile">SOURCES := foo.cpp src/bar.cpp
+</code></pre>
+
+<h3 id="build-flags">Build Flags</h3>
+<p>The usual <code>CFLAGS</code> and <code>LDFLAGS</code> can be used to customize the build process. For example, here&rsquo;s how you might enable pthreads in the compiler:</p>
+<pre><code class="makefile">CXXFLAGS += -pthread
+LDFLAGS := -lpthread
+</code></pre>
+
+<h3 id="execution-arguments">Execution Arguments</h3>
+<p>The <code>RUNARGS</code> variable is used to specify command-line arguments to be used when executing your program. You might, for example, need to specify the input file. Here&rsquo;s an example from the fluidanimate program:</p>
+<pre><code class="makefile">RUNARGS := 4 5 in_300K.fluid out.fluid
+</code></pre>
+
+<p>It is also a good idea to provide a separate input for ACCEPT&rsquo;s <em>testing</em> phase, which automatically evaluates the final impact of ACCEPT&rsquo;s optimizations. Providing a separate input avoids overfitting to one specific input set, so we take inspiration from the <a href="http://en.wikipedia.org/wiki/Test_set">training and testing sets</a> used in machine learning.</p>
+<p>Use the <code>TESTARGS</code> variable to provide a second, potentially slower-running, invocation of your program. Again, here&rsquo;s an example from fluidanimate:</p>
+<pre><code class="makefile">TESTARGS := 4 5 in_300K.fluid out.fluid
+</code></pre>
+
+<h3 id="setup-tasks">Setup Tasks</h3>
+<p>In rare cases, you may need to do some setup work before any ACCEPT tasks get started. In one of our benchmarks, for example, we need to build a tool to do the quality evaluation; in another, a <code>./configure</code> script is necessary to adapt to platform details. In this case, you can define a <code>setup</code> target in your Makefile describing tasks to be run before any invocation of the ACCEPT workflow.</p></div>
+        </div>
+
+        
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script src="../js/base.js"></script>
+    </body>
+</html>

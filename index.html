@@ -1,1 +1,636 @@
-Hello World
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>UofT CS Robotics Group</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/sampa.css" rel="stylesheet">
+        <link rel="alternate" type="application/atom+xml" title="Atom"
+            href="blog/blog.xml">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon">
+    </head>
+    <body>      
+        <div class="container">
+          <div class="header">
+            <a href="https://robotics.cs.toronto.edu/">
+              <img src="img/sampa.png"         srcset="img/sampa@2x.png 2x"  alt="Sampa" id="logo">
+            </a>
+            <ul class="nav nav-pills pull-right">
+                  
+                  
+                    
+                    <li class="nav-item">
+                      <a class="nav-link active" href="index.html">
+                        Home
+                      </a>
+                    </li>
+                  
+                    
+                    <li class="nav-item">
+                      <a class="nav-link " href="courses.html">
+                        Courses
+                      </a>
+                    </li>
+                  
+                    
+                    <li class="nav-item">
+                      <a class="nav-link " href="reading_group.html">
+                        Reading Group
+                      </a>
+                    </li>
+                  
+            </ul>
+          </div>
+
+          
+
+          
+<div class="content">
+<div class="jumbotron">
+  <p>
+    Welcome to the <b>Computer Science Robotics Group at the University of Toronto</b>! We develop cutting-edge robotics methodology and systems that are informed by control theory, design, optimization, machine learning, state estimation, and 3D perception. Our research activities span medical, continuum, soft robots, mobile manipulation, legged locomotion, field robotics, and human-robot interaction. We are part of the <a href="https://robotics.utoronto.ca/">Robotics Institute</a>, the <a href="https://www.utm.utoronto.ca/math-cs-stats/home">Department of Mathematics and Computational Sciences</a>, and the <a href="http://www.cs.toronto.edu/">Department of Computer Science</a> at the <a href="http://www.cs.toronto.edu/">University of Toronto</a>.
+  </p>
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-md-5">
+        
+        
+            <h3>Faculty</h3>
+            <ul class="people faculty">
+            
+                
+                
+                <li>
+                    <a href="https://crl.utm.utoronto.ca/crl/jbk/">
+
+		             
+                        <img class="img-circle profile" src="img/people/jbk.png" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://crl.utm.utoronto.ca/crl/jbk/">
+                    <h4>Jessica Burgner-Kahrs</h4>
+                    </a>
+                    <p class="bio">Associate Professor <br/> <a href="https://crl.utm.utoronto.ca/crl">Continuum Robotics Lab</a></p>
+		    
+                    </div>
+                </li>
+
+		
+            
+                <li>
+                    <a href="http://www.cs.toronto.edu/~garg/">
+
+		             
+                        <img class="img-circle profile" src="img/people/garg.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="http://www.cs.toronto.edu/~garg/">
+                    <h4>Animesh Garg</h4>
+                    </a>
+                    <p class="bio">Assistant Professor <br/> <a href="http://pair.cs.toronto.edu">People, AI, and Robots Lab</a></p>
+                    </div>
+                </li>
+                
+
+		<li>
+                    <a href="http://www.cs.toronto.edu/~florian/">
+
+		             
+                        <img class="img-circle profile" src="img/people/florian.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="http://www.cs.toronto.edu/~florian/">
+                    <h4>Florian Shkurti</h4>
+                    </a>
+                    <p class="bio">Assistant Professor <br/> <a href="https://rvl.cs.toronto.edu">Robot Vision and Learning Lab</a></p>
+                    </div>
+                </li>
+                
+                
+            
+		<li>
+                    <a href="https://www.gilitschenski.org/igor/">
+
+		             
+                        <img class="img-circle profile" src="img/people/igor.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://www.gilitschenski.org/igor/">
+                    <h4>Igor Gilitschenski</h4>
+                    </a>
+                    <p class="bio">Assistant Professor Robotics <br/> <a href="https://www.gilitschenski.org/igor/">Intelligent Systems Lab</a></p>
+                    </div>
+                </li>
+
+
+		<li>
+                    <a href="https://www.cs.toronto.edu/~lakahrs/">
+
+		             
+                        <img class="img-circle profile" src="img/people/lak.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://www.cs.toronto.edu/~lakahrs/">
+                    <h4>Lueder Kahrs</h4>
+                    </a>
+                    <p class="bio">Assistant Professor <br/> <a href="https://www.cs.toronto.edu/~lakahrs/">Medical Computer Vision + Robotics Lab</a></p>
+                    </div>
+                </li>
+                
+                
+                       
+            </ul>
+        
+        
+        
+            <!--h3>Staff</h3>
+            <ul class="people staff">
+                
+                <li>
+                    <a href="http://www.cs.washington.edu/homes/melody/">
+                    
+                        <img class="img-circle profile" src="https://homes.cs.washington.edu/~melody/index_files/image002.gif" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="http://www.cs.washington.edu/homes/melody/">
+                    <h4>Melody Kadenko</h4>
+                    </a>
+                    <p class="bio">Program Director</p>
+                    </div>
+                </li>
+                
+            
+            </ul-->
+        
+        
+        
+            <h3>Postdocs</h3>
+            <ul class="people postdoc">
+                
+                <li>
+                    <a href="http://homes.cs.washington.edu/~moreau/">
+                        <img class="img-circle profile" src="img/people/moreau.jpg" />
+                    </a>
+                    <div class="person">
+                    <a href="http://homes.cs.washington.edu/~moreau/">
+                    <h4>Quentin Peyron</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="http://www.dustinrichmond.com">
+                        <img class="img-circle profile" src="img/people/drichmond.jpg" />
+                    </a>
+                    <div class="person">
+                    <a href="http://www.dustinrichmond.com">
+                    <h4>Nikita Dvornik</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+            </ul>
+        
+    </div>
+
+    <div class="col-md-7">
+        
+            <h3>Graduate Students</h3>
+            <ul class="people grad">
+                <li>
+                    <a href="https://georgegu1997.github.io/">
+                    
+                        <img class="img-circle profile" src="img/people/qiaogu.png" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://georgegu1997.github.io/">
+                    <h4>Qiao Gu</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+
+		    <a href="https://kevincxie.github.io/">
+                      <!--img class="img-circle profile" src="img/people/my_square_photo.jpg" /-->   <!-- enable this when you add your photo-->
+		      <svg class="profile"><circle class="noprofile" /></svg>    <!-- disable this when you add your photo-->
+                    </a>
+                    
+                    <div class="person">
+
+		      <a href="https://kevincxie.github.io/">
+			<h4>Kevin Xie</h4>
+		      </a>
+                    
+                    
+                    </div>
+                </li>
+
+
+		<li>
+
+		    <a href="https://wuziyi616.github.io/">
+                      <!--img class="img-circle profile" src="img/people/my_square_photo.jpg" /-->   <!-- enable this when you add your photo-->
+		      <svg class="profile"><circle class="noprofile" /></svg>    <!-- disable this when you add your photo-->
+                    </a>
+                    
+                    <div class="person">
+
+		      <a href="https://wuziyi616.github.io/">
+			<h4>Ziyi Wu</h4>
+		      </a>
+                    
+                    
+                    </div>
+                </li>
+
+		
+		
+
+		<li>
+                    <a href="https://cvoelcker.de/page/about/">
+                      
+                        <img class="img-circle profile" src="img/people/claas.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://cvoelcker.de/page/about/">
+                    <h4>Claas Voelcker</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+
+		<li>
+
+		    <a href="">
+                      <!--img class="img-circle profile" src="img/people/my_square_photo.jpg" /-->   <!-- enable this when you add your photo-->
+		      <svg class="profile"><circle class="noprofile" /></svg>    <!-- disable this when you add your photo-->
+                    </a>
+                    
+                    <div class="person">
+
+		      <a href="">
+			<h4>Skylar Hao</h4>
+		      </a>
+                                      
+                    </div>
+                </li>
+
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~eafurst/">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/eafurst.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~eafurst/">
+                    <h4>Emily Furst</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    
+                    
+                    
+
+                    
+                        <svg class="profile"><circle class="noprofile" /></svg>
+                    
+                    
+                    <div class="person">
+                    
+                    <h4>Paul Gao</h4>
+                    
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~katielim/">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/katielim.png" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~katielim/">
+                    <h4>Katie Lim</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~cyulin/">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/chienyu.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~cyulin/">
+                    <h4>Chien-Yu Lin</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~mgliu/">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/mgliu.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~mgliu/">
+                    <h4>Ming Liu</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~liangluo/">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/liangluo.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~liangluo/">
+                    <h4>Liang Luo</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~amrita">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="https://homes.cs.washington.edu/~amrita/assets/img/amz.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~amrita">
+                    <h4>Amrita Mazumdar</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~patelp1/">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/patelp1.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~patelp1/">
+                    <h4>Pratyush Patel</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    
+                    
+                    
+
+                    
+                        <svg class="profile"><circle class="noprofile" /></svg>
+                    
+                    
+                    <div class="person">
+                    
+                    <h4>Max Ruttenberg</h4>
+                    
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://neildryan.com/">
+                    
+                    
+
+                    
+                        <svg class="profile"><circle class="noprofile" /></svg>
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://neildryan.com/">
+                    <h4>Neil Ryan</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="http://justg.us">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/gussmith.png" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="http://justg.us">
+                    <h4>Gus Smith</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~vegaluis/">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/luis.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~vegaluis/">
+                    <h4>Luis Vega</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://mwillsey.com">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/max.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://mwillsey.com">
+                    <h4>Max Willsey</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~wysem/">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/wysem.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~wysem/">
+                    <h4>Mark Wyse</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+                
+            
+                
+                
+                <li>
+                    <a href="https://homes.cs.washington.edu/~eqy/">
+                    
+                    
+
+                    
+                        <img class="img-circle profile" src="img/people/eddie.jpg" />
+                    
+                    </a>
+                    <div class="person">
+                    <a href="https://homes.cs.washington.edu/~eqy/">
+                    <h4>Eddie Yan</h4>
+                    </a>
+                    
+                    </div>
+                </li>
+            
+		
+            </ul>
+        
+        
+    </div>
+
+</div>
+
+
+<h2>Funding</h2>
+<p>
+Our work is supported by the Natural Sciences and Engineering Research Council (NSERC) of Canada, CIFAR, Vector Institute, and generous gifts from Amazon, LG, Samsung, and others.
+</p>
+
+</div>
+
+
+      <div class="footer">
+  <p>
+    <a href="http://www.toronto.edu/">University of Toronto</a>
+  </p>
+</div>
+
+        </div> <!-- /container -->
+
+        <!-- Support retina images. -->
+        <script type="text/javascript"
+            src="js/srcset-polyfill.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        
+    </body>
+</html>
