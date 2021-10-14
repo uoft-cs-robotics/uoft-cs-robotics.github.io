@@ -50,3 +50,14 @@
         srcset(images[i]);
     }
 })(window, document);
+
+function sortAlphabetically(listId) {
+    const ul = document.getElementById(listId);
+
+    Array.from(ul.getElementsByTagName("LI"))
+        .sort((a, b) => a.innerText.localeCompare(b.innerText))
+        .forEach(li => ul.appendChild(li));
+}
+
+sortAlphabetically("gradStudents");
+sortAlphabetically("postdoc");
