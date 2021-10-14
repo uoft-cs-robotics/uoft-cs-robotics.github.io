@@ -51,13 +51,16 @@
     }
 })(window, document);
 
-function sortAlphabetically(listId) {
+function sortByLastName(listId) {
     const ul = document.getElementById(listId);
+    function lastname(name) {
+        return name.split(' ').slice(-1).join(' ')
+    }
 
     Array.from(ul.getElementsByTagName("LI"))
-        .sort((a, b) => a.innerText.localeCompare(b.innerText))
+        .sort((a, b) => lastname(a.innerText).localeCompare(lastname(b.innerText)))
         .forEach(li => ul.appendChild(li));
 }
 
-sortAlphabetically("gradStudents");
-sortAlphabetically("postdoc");
+sortByLastName("gradStudents");
+sortByLastName("postdoc");
