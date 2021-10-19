@@ -81,7 +81,11 @@ ul.people {
   ul.people li {
     height: auto;
     display: table;
-    margin: 0rem; }
+    margin: 0rem; 
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
     ul.people li .profile {
       text-align: center;
       display: table-cell;
