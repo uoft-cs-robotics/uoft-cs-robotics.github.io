@@ -162,6 +162,17 @@ ul.project-people {
 .container-narrow > hr {
   margin: 30px 0; }
 
+
+/* content-card */
+/*use this for projects and courses lists*/
+.content-card {
+  text-align: left;
+  border-bottom: 1px solid #e5e5e5; 
+  padding-top: 18px;
+  padding-bottom: 10px; }
+
+
+
 /* Jumbotron */
 .jumbotron {
   text-align: center;
@@ -174,7 +185,7 @@ ul.project-people {
   padding-top: 18px;
   padding-bottom: 10px; }
 
-/* Sampa logo */
+/* logo */
 #logo {
   width: 250px;
   height: 58px;
